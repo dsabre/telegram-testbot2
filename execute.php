@@ -21,4 +21,7 @@ $text = strtolower($text);
 header("Content-Type: application/json");
 $parameters = array('chat_id' => $chatId, "text" => json_encode($update));
 $parameters["method"] = "sendMessage";
+
+$parameters["reply_markup"] = '{ "keyboard": [["uno"], ["due"], ["tre"], ["quattro"]], "one_time_keyboard": false}';
+
 echo json_encode($parameters);
