@@ -27,6 +27,4 @@ $parameters["method"] = "sendMessage";
 
 //$parameters["reply_markup"] = '{ "keyboard": [["uno", "due"], ["tre", "quattro"], ["cinque"]], "resize_keyboard": true, "one_time_keyboard": false}';
 
-die($parameters);
-
 echo json_encode($parameters);
