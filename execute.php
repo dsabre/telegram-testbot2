@@ -3,8 +3,6 @@ $content = file_get_contents("php://input");
 $content = '{"update_id":534691111,"message":{"message_id":246,"from":{"id":30343769,"is_bot":false,"first_name":"Daniele","username":"Wuzzifuzz","language_code":"it"},"chat":{"id":30343769,"first_name":"Daniele","username":"Wuzzifuzz","type":"private"},"date":1516969830,"text":"Deh"}}';
 $update = json_decode($content, true);
 
-echo '<pre>';var_dump($update);die;
-
 if(!$update){
   exit;
 }
@@ -28,5 +26,7 @@ $parameters = array('chat_id' => $chatId, "text" => $json);
 $parameters["method"] = "sendMessage";
 
 //$parameters["reply_markup"] = '{ "keyboard": [["uno", "due"], ["tre", "quattro"], ["cinque"]], "resize_keyboard": true, "one_time_keyboard": false}';
+
+echo '<pre>';var_dump($parameters);die;
 
 echo json_encode($parameters);
