@@ -1,5 +1,6 @@
 <?php
 $content = file_get_contents("php://input");
+$content = '{"update_id":534691111,"message":{"message_id":246,"from":{"id":30343769,"is_bot":false,"first_name":"Daniele","username":"Wuzzifuzz","language_code":"it"},"chat":{"id":30343769,"first_name":"Daniele","username":"Wuzzifuzz","type":"private"},"date":1516969830,"text":"Deh"}}';
 $update = json_decode($content, true);
 
 if(!$update){
@@ -18,10 +19,12 @@ $text = isset($message['text']) ? $message['text'] : "";
 $text = trim($text);
 $text = strtolower($text);
 
+$json = file_get_contents("https://chainz.cryptoid.info/explorer/api.dws?q=summary");
+
 header("Content-Type: application/json");
-$parameters = array('chat_id' => $chatId, "text" => json_encode($update));
+$parameters = array('chat_id' => $chatId, "text" => $json);
 $parameters["method"] = "sendMessage";
 
-$parameters["reply_markup"] = '{ "keyboard": [["uno", "due"], ["tre", "quattro"], ["cinque"]], "resize_keyboard": true, "one_time_keyboard": false}';
+//$parameters["reply_markup"] = '{ "keyboard": [["uno", "due"], ["tre", "quattro"], ["cinque"]], "resize_keyboard": true, "one_time_keyboard": false}';
 
 echo json_encode($parameters);
