@@ -1,6 +1,8 @@
 <?php
 
-exit;
+if(php_sapi_name() !== 'cli'){
+	exit;
+}
 
 // PARAMETRI DA MODIFICARE
 $WEBHOOK_URL = 'https://{BOT}.herokuapp.com/execute.php';
