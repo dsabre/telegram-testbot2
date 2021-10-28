@@ -1,5 +1,6 @@
 <?php
 
+// check if script is called from PHP cli
 if(php_sapi_name() !== 'cli'){
 	exit;
 }
