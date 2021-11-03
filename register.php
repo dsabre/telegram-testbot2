@@ -1,18 +1,23 @@
 <?php
 
-// check if script is called from PHP cli
+/**
+* Usage: php register.php HEROKU_PROJECT TELEGRAM_BOT_TOKEN
+*/
+
+// check if script is called from PHP cli, otherwise block execution
 if(php_sapi_name() !== 'cli'){
+	header("HTTP/1.1 404 Not Found");
 	exit;
 }
 
-// params to edit
-const HEROKU_PROJECT = 'YOUR HEROKU PROJECT NAME';
-// do not share your Telegram bot token with anyone!!!
-const TELEGRAM_BOT_TOKEN = 'YOUR TELEGRAM BOT TOKEN';
+// check if cli args are present
+if(count($argv) < 3){
+	exit(sprintf("Arguments not provided, usage:\nphp %s HEROKU_PROJECT TELEGRAM_BOT_TOKEN \n\n", basename(__FILE__)));
+}
 
-// NON APPORTARE MODIFICHE NEL CODICE SEGUENTE
-$parameters = array('url' => 'https://' . HEROKU_PROJECT . '.herokuapp.com/execute.php');
-$url = 'https://api.telegram.org/bot' . TELEGRAM_BOT_TOKEN .'/setWebhook?' . http_build_query($parameters);
+// bind telegram bot to heroku project
+$parameters = array('url' => 'https://' . $argv[1] . '.herokuapp.com/execute.php');
+$url = 'https://api.telegram.org/bot' . $argv[2] .'/setWebhook?' . http_build_query($parameters);
 $handle = curl_init($url);
 curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
