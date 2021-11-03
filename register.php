@@ -5,15 +5,14 @@ if(php_sapi_name() !== 'cli'){
 	exit;
 }
 
-// PARAMETRI DA MODIFICARE
-$WEBHOOK_URL = 'https://{BOT}.herokuapp.com/execute.php';
-$BOT_TOKEN = '{TOKEN}';
+// params to edit
+const HEROKU_PROJECT = 'YOUR HEROKU PROJECT NAME';
+// do not share your Telegram bot token with anyone!!!
+const TELEGRAM_BOT_TOKEN = 'YOUR TELEGRAM BOT TOKEN';
 
 // NON APPORTARE MODIFICHE NEL CODICE SEGUENTE
-$API_URL = 'https://api.telegram.org/bot' . $BOT_TOKEN .'/';
-$method = 'setWebhook';
-$parameters = array('url' => $WEBHOOK_URL);
-$url = $API_URL . $method. '?' . http_build_query($parameters);
+$parameters = array('url' => 'https://' . HEROKU_PROJECT . '.herokuapp.com/execute.php');
+$url = 'https://api.telegram.org/bot' . TELEGRAM_BOT_TOKEN .'/setWebhook?' . http_build_query($parameters);
 $handle = curl_init($url);
 curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
